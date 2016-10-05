@@ -1,15 +1,12 @@
+## The two functions create a matrix object that can store along the matrix
+## inverse. The inverse is calculated and stored with the cacheSolve function.
+
 ## The function makeCacheMatrix creates a new matrix type element
 ## that can store the inverse of the matrix along with the data values
 
-## The cacheSolve function first checks if the inverse of the matrix
-## Element was already calculated. If so, it will return the inverse
-## the matrix, if not, it will calculate it and return it.
-
-## The function makeCache will create a new object, set the inverse to NULL
-##
 
 makeCacheMatrix <- function(x = matrix()) {
-        inv <- NULL
+        inv <- matrix(ncol=3, nrow=3)
         set <- function(y){
             x<<-y
             inv<<-NULL
@@ -24,16 +21,21 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## The cacheSolve function first checks if the inverse of the matrix
+## Element was already calculated. If so, it will return the inverse
+## the matrix, if not, it will calculate it and return it.
 
-cacheSolve <- function(x, ...) {
+
+cacheSolve <- function(x = matrix(), ...) {
         inv<- x$getinvers()
-        if(!is.null(inv)){
+        if(sum(!is.na(inv))>0){
             message ("getting cached data")
-            return(m)
+            return(inv)
         }
         data <- x$get()
-        inv <- solve(x)
+        print("calculating")
+        inv <- solve(data)
         x$setinverse(inv)
         inv
+        
 }
